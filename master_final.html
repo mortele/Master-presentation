@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="A Computational Framework for Multiscale Modelling">
+
+<title>A Computational Framework for Multiscale Modelling</title>
+
+
+
+
+
+
+
+<!-- reveal.js: http://lab.hakim.se/reveal-js/ -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+<link rel="stylesheet" href="reveal.js/css/reveal.css">
+<link rel="stylesheet" href="reveal.js/css/theme/beige.css" id="theme">
+<!--
+<link rel="stylesheet" href="reveal.js/css/reveal.css">
+<link rel="stylesheet" href="reveal.js/css/theme/beige.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/beigesmall.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/serif.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/moon.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/sky.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/darkgray.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/default.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/cbc.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/simula.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/league.css" id="theme">
+-->
+
+<!-- For syntax highlighting -->
+<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+
+<!-- Printing and PDF exports -->
+<script>
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
+
+<style type="text/css">
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    p.caption { width: 80%; font-size: 60%; font-style: italic; text-align: left; }
+    hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    .reveal .alert-text-small   { font-size: 80%;  }
+    .reveal .alert-text-large   { font-size: 130%; }
+    .reveal .alert-text-normal  { font-size: 90%;  }
+    .reveal .alert {
+             padding:8px 35px 8px 14px; margin-bottom:18px;
+             text-shadow:0 1px 0 rgba(255,255,255,0.5);
+             border:5px solid #bababa;
+             -webkit-border-radius: 14px; -moz-border-radius: 14px;
+             border-radius:14px;
+             background-position: 10px 10px;
+             background-repeat: no-repeat;
+             background-size: 38px;
+             padding-left: 30px; /* 55px; if icon */
+     }
+     .reveal .alert-block {padding-top:14px; padding-bottom:14px}
+     .reveal .alert-block > p, .alert-block > ul {margin-bottom:1em}
+     /*.reveal .alert li {margin-top: 1em}*/
+     .reveal .alert-block p+p {margin-top:5px}
+
+	 
+	 bblockquote {
+		    font-family: Georgia, serif;
+		    font-style: italic;
+			width: 70%;
+			margin: 5px auto;
+			padding: 5px;		    
+		    position: relative;
+		    color: #383838;
+		}
+
+		bblockquote:before {
+		    display: block;
+		    padding-left: 0px;
+		    content: "\201C";
+		    font-size: 120px;
+		    position: absolute;
+		    left: -60px;
+		    top: 20px;
+			color:#889c0b;		
+		}
+		
+		bblockquote footer {
+		    padding: 0 2em 0 0;
+		    text-align:right;
+		}
+		bblockquote footer:after { 
+		    display: block;
+		    content: "\201D";
+		    font-weight: bold;
+		    font-size:100px;
+		    color:#889c0b;
+		    position: relative; 
+		    right: -50px;
+		    bottom: 90px; 
+		    font-family: 'Georgia'; 
+		}
+
+
+     /*.reveal .alert-notice { background-image: url(http://hplgit.github.io/doconce/bundled/html_images/small_gray_notice.png); }
+     .reveal .alert-summary  { background-image:url(http://hplgit.github.io/doconce/bundled/html_images/small_gray_summary.png); }
+     .reveal .alert-warning { background-image: url(http://hplgit.github.io/doconce/bundled/html_images/small_gray_warning.png); }
+     .reveal .alert-question {background-image:url(http://hplgit.github.io/doconce/bundled/html_images/small_gray_question.png); } */
+</style>
+
+
+
+<!-- Styles for table layout of slides -->
+<style type="text/css">
+td.padding {
+  padding-top:20px;
+  padding-bottom:20px;
+  padding-right:50px;
+  padding-left:50px;
+}
+</style>
+
+</head>
+
+<body>
+<div class="reveal">
+
+<!-- Any section element inside the <div class="slides"> container
+     is displayed as a slide -->
+
+<div class="slides">
+
+
+
+    
+
+<!-- ------------------- main content ---------------------- -->
+
+
+<!-- ------------------- SLIDE 1 ---------------------- -->
+<!-- ------------------- SLIDE 1 ---------------------- -->
+<!-- ------------------- SLIDE 1 ---------------------- -->
+<section>
+	<center>
+		<h1 style="text-align: center;">
+			A Computational Framework for Multiscale Modelling
+		</h1>
+	</center>
+	
+	<p>
+		<center>
+			<b>Morten Ledum</b>  (<tt>morten.ledum@fys.uio.no</tt>)
+		</center>
+	<p>
+		<br>
+		<center>
+			<p>
+				<img src="UiO_Segl_300dpi.png" align="bottom" width=197 style="border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;">
+			</p>
+		</center>
+	<p>
+	<center>
+		Faculty of Mathematics and Natural Sciences <br> University of Oslo
+	</center>
+	<br>
+	<center>
+		January 2018
+	</center>
+	<br>
+	<aside class="notes">
+		<small>
+			skal først gi et overblikk over målet med oppgava og multiskala modellering generelt
+			<br>
+			så litt teori om QM og MD og maskinlæring
+			<br> 
+			så eksempler på bruk av systemet som jeg har utviklet
+		</small>
+	</aside>
+</section>
+
+
+
+<!-- ------------------- SLIDE 2 ---------------------- -->
+<!-- ------------------- SLIDE 2 ---------------------- -->
+<!-- ------------------- SLIDE 2 ---------------------- -->
+<section>
+	<h2>What is multiscale modelling?</h2>
+	Modelling schemes where physical systems are considered at different length and time scales. 
+
+	<br><br> 
+
+	Used to handle systems where physical processes on different orders of magnitude (spatially and temporally) are intertwined and must be simultaneously considered in order to gain scientific insight.
+	
+	<br>
+	<p>
+		<center>
+			<div style="display: inline-block;">
+				<img src="alanine.png"    width=150 style="vertical-align:middle; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;">
+				<div class="under">Alanine, C<sub>3</sub>H<sub>7</sub>NO<sub>2</sub> <br>~50 electrons</div>
+				<!-- https://en.wikipedia.org/wiki/Alanine -->
+			</div>
+
+			<div style="display: inline-block;">
+				<img src="rightarrow.png" width=50  style="vertical-align:middle; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+			</div>
+
+			<div style="display: inline-block;">
+				<img src="residue.png"    width=300 style="vertical-align:middle; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;">
+				<div class="under">Amino acid residue <br> ~500 electrons</div>
+				<!-- http://www.biotage.com/news/microwave-assisted-organic-and-peptide-synthesis-of-a-non-natura -->
+			</div>
+
+			<div style="display: inline-block;">
+				<img src="rightarrow.png" width=50  style="vertical-align:middle; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+			</div>
+
+			<div style="display: inline-block;">
+				<img src="protein.png"    width=400 style="vertical-align:middle; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;">
+				<div class="under">Myoglobin protein <br> >10 &nbsp; 000 electrons </div>
+				<!-- https://en.wikipedia.org/wiki/Protein -->
+			</div>
+		</center>
+	</p>
+
+	<aside class="notes">
+		<small>
+			MSM: Måte å håndtere fysiske prosesser med viktige dynamiske effekter på forskjellige lengde/tidsskalaer
+			<br><br>
+			Eksempel: Innen biologi er protein-folding viktig
+			<br>
+			proteiner er kjeder av aminosyrer krølla opp på bestemte måter med noen deler u-krølla
+			<br>
+			hver aminosyre er et molekyl, interagerer med omgivelsene sine 
+			<br>
+			kan tenkes at proteinet oppfører seg som en enhet, effektivt interagerer med andre hele proteiner
+			<br>
+			samtidig interagerer u-krølla biter med enkelt-molekyler 
+		</small>
+	</aside>
+</section>
+
+
+<!-- ------------------- SLIDE 3 ---------------------- -->
+<!-- ------------------- SLIDE 3 ---------------------- -->
+<!-- ------------------- SLIDE 3 ---------------------- -->
+<section>
+	<h2>The world is quantum mechanical</h2>
+	At the most fundamental level, everything adheres to the laws of quantum mechanics, 
+	<br><br>
+	\begin{align}
+	\hat H |\Psi(t)\rangle = \mathrm{i}\hbar \frac{\partial}{\partial t}|\Psi(t)\rangle.
+	\end{align}
+	<br>
+	We can in principle find the dynamics of <i>any</i> physical system by solving the Schrödinger equation for the relevant Hamiltonian.
+	<br><br><br><br>
+
+  	<bblockquote>
+    	The underlying physical laws necessary for the mathematical theory of a large part of physics and the whole of chemistry are thus completely known, and the difficulty is only that the exact application of these equations leads to equations much too complicated to be soluble.
+    	<footer>
+    		P. A. M. Dirac 
+    		<br>
+    		1929
+    	</footer>
+  	</bblockquote>
+
+  	<aside class="notes">
+		<small>
+			på det mest fundamentale nivå er hele verden bare kvantemekanikk (dette er schrödinger eq.)
+			<br>
+			vi kan i prinsippet finne dynamikken til ethvert fysisk system utifra SE
+			<br> 
+			men selv for relativt små og isolerte systemer er dette veldig omfattende
+			<br>
+			for den minste biten i forige slide: partiell diff. lign. i omtrent 300 frihetsgrader
+		</small>
+	</aside>
+</section>
+
+
+<!-- ------------------- SLIDE 4 ---------------------- -->
+<!-- ------------------- SLIDE 4 ---------------------- -->
+<!-- ------------------- SLIDE 4 ---------------------- -->
+<section>
+	<h2>Coarse graining and <i>effective potentials</i></h2>
+	As direct&mdash;<i>ab initio</i>&mdash;solution of the Schödinger equation is unfeasible for large scale systems, approximations are needed in order to make progress.
+	<br><br>
+	Coarse graining entails collecting constituent parts of the system into larger entities for which the dynamics are integrated as if these larger particles interact via some approximate effective potential. This <i>freezes</i> out the internal degrees of freedom of the larger particles.
+	<br><br>
+	If we can find a reasonable parametrization of the inter-atomic potential $V(r)$, $r\equiv|{\bf r}_1-{\bf r}_2|$, we may integrate the atomic motion classically in terms of Newton's laws, 
+	<br><br>
+	\begin{align}
+	\frac{\partial {\bf p}}{\partial t} = {\bf F},
+	\end{align}
+	<br>
+	with
+	<br><br>
+	\begin{align}
+	{\bf F}=-\nabla V(r).
+	\end{align}
+
+  	<aside class="notes">
+		<small>
+			siden vi ikke kan løse SE <i>direkte</i> for store systemer, må vi gjøre noen grep
+			<br>
+			vi fryser ut de elekroniske frihetsgradene og tenker oss atomene som punktpartiker som interagerer via et tilnærmet effektivt potensiale
+			<br>
+			håpet er da at atomene er tunge og treige nok til at vi trygt kan regne dynamikken klassisk ved Newtons lover
+			<br>
+			dette er essentsiellt molekylærdynamikk
+		</small>
+	</aside>
+</section>
+
+
+
+<!-- ------------------- SLIDE 5 ---------------------- -->
+<!-- ------------------- SLIDE 5 ---------------------- -->
+<!-- ------------------- SLIDE 5 ---------------------- -->
+<section>
+	<center>
+		<img src="multiscale-web-kopi.png" width=1000 style="vertical-align:middle; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;">
+	</center>
+
+	<aside class="notes">
+		<small>
+			hierarkiet av tilnærminger
+			<br>
+			bunnen er mest fundamental, så kommer MD
+			<br>
+			til slutt kontinuumsmodeller i makro-verden når antall partikler nærmer seg avogadros tall
+		</small>
+	</aside>
+</section>
+
+<!-- ------------------- SLIDE 7 ---------------------- -->
+<!-- ------------------- SLIDE 7 ---------------------- -->
+<!-- ------------------- SLIDE 7 ---------------------- -->
+<section>
+	<!-- How are effective parametrizations traditionally made? -->
+	<h2>Traditional effective inter-atomic potentials</h2>
+	Traditionally, the potentials and associated force fields (FF) are constructed as functional forms inspired by physical and chemical intuition. Some parameters are traditionally included and tuned in order to reproduce (e.g.) some thermodynamic variable when the FF is employed in molecular dynamics calculations.
+	<br><br>
+	In general, such potentials can be written as a sum of one-body, two-body, three-body, and higher order terms,
+	<br><br>
+	\begin{align}
+	V({\bf R}) = \sum_{i=1}^N V_1({\bf r}_i) + \sum_{i=1}^N\sum_{j=i+1}^N V_2({\bf r}_i,{\bf r}_j) + \sum_{i < j < k}^N V_3({\bf r}_i,{\bf r}_j,{\bf r}_k) \dots , \ \ \text{ with } {\bf R}=\{{\bf r}_1, {\bf r}_2,\dots,{\bf r}_N\}.
+	\end{align}
+	<br>
+	As the number of unique combinations of $i$, $j$, $k$, $l$, etc. which need to be taken into account for calculating an $n$-body term grows as
+	<br><br>
+	\begin{align}
+	\text{combinations}(n) = {N \choose n},
+	\end{align}
+	<br>
+	this expansion needs to be truncated.
+</section>
+
+
+<!-- ------------------- SLIDE 8 ---------------------- -->
+<!-- ------------------- SLIDE 8 ---------------------- -->
+<!-- ------------------- SLIDE 8 ---------------------- -->
+<section>
+	<!-- Why machine learning approach offers attractive benefits over traditional methods. -->
+	<h2>A machine learning approach</h2>
+	Traditional potential fitting by hand relies heavily on the physical intuitions and imagination of the experimenter performing the parametrization. This is inherently problematic. An ideal approach is one which is completely independent of the human experimenter. 
+	<br><br>
+	Machine learning and narrow artificial intelligence (AI) offers an attractive alternative approach. Instead of a pre-determined functional form, artificial neural networks (ANN) can approximate <i>any</i> functional form without any human interference, given nothing but a sizeable collection of <b>training</b> examples.
+</section>
+
+
+<!-- ------------------- SLIDE 8.5 ---------------------- -->
+<!-- ------------------- SLIDE 8.5 ---------------------- -->
+<!-- ------------------- SLIDE 8.5 ---------------------- -->
+<section>
+	For example, an angular three-body term for a potential describing H&mdash;O and H&mdash;H interactions must take into account that there is a minimum located at bond length $d\simeq 1,811 a_0$ and H&mdash;O&mdash;H angle $\theta = 104.45^\circ$. If this is not satisfied, any MD calculations using this effective potential will obviously give <b>qualitatively wrong results</b>. 
+	<br><br>
+	This is a trivial case, but serves to illustrate the point: <i>a priori</i> knowledge about the physical system at hand is needed. This is a problem if we wish to explore a completely unknown physical system.
+	<br><br>
+	<center>
+		<img src="h2o.png" width=500 style="vertical-align:middle; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;">
+	</center>
+	<!-- https://en.wikipedia.org/wiki/Properties_of_water -->
+	<br><br>
+	All that is needed&mdash;on the other hand&mdash;for the machine learning approach is a way to compute energies for given atomic configurations which can be served to an ANN as training examples.
+</section>
+
+
+<!-- ------------------- SLIDE 9 ---------------------- -->
+<!-- ------------------- SLIDE 9 ---------------------- -->
+<!-- ------------------- SLIDE 9 ---------------------- -->
+<section>
+	<!-- Ab initio quantum mechanics and the Born-Oppenheimer approximation.-->
+	<h2><i>Ab initio</i> quantum mechanics and the Born-Oppenheimer approximation</h2>
+	For relatively small physical systems consisting of relatively few particles, we may solve the Schrödinger equation from first principles&mdash;<i>ab initio</i>&mdash;under certain sets of approximations. The most common approximation is the Born-Oppenheimer approximation BOA. 
+	<br><br>
+	Under the BOA, the electronic and the nucleuonic degrees of freedom are separated essentially freezing the heavier nuclei in place. Because the protons are almost 2&nbsp;000 times heavier than the electrons, little momentum transfer will occur between them. We may thus solve the electronic Schrödinger equation which depends only parametrically on the positions of the nuclei. 
+	<br><br>
+	\begin{align}
+	\hat H = -\sum_{i=1}^N \frac{\nabla^2_i}{2}-\sum_{A=1}^M \frac{\nabla^2_A}{2M_A} - \sum_{i=1}^N\sum_{A=1}^M \frac{Z_A}{|{\bf r}_i-{\bf r}_A|} + \sum_{i=1}^N\sum_{j=i+1}^N \frac{1}{|{\bf r}_i-{\bf r}_j|} + \sum_{A=1}^M\sum_{B=A+1}^M \frac{Z_ZA_B}{|{\bf r}_A-{\bf r}_B|}
+	\end{align}
+</section>
+
+
+<!-- ------------------- SLIDE 9.5 ---------------------- -->
+<!-- ------------------- SLIDE 9.5 ---------------------- -->
+<!-- ------------------- SLIDE 9.5 ---------------------- -->
+<section>
+	Electrons moving in a field of fixed nuclei according to the electronic BO-Hamiltonian
+	<br><br>
+	\begin{align}
+	\hat H_e = -\sum_{i=1}^N \frac{\nabla^2_i}{2}- \sum_{i=1}^N\sum_{A=1}^M \frac{Z_A}{|{\bf r}_i-{\bf r}_A|} + \sum_{i=1}^N\sum_{j=i+1}^N \frac{1}{|{\bf r}_i-{\bf r}_j|} + \underbrace{\sum_{A=1}^M\sum_{B=A+1}^M \frac{Z_ZA_B}{|{\bf r}_A-{\bf r}_B|}}_{\text{constant}}
+	\end{align}
+	<br>
+	After finding the electronic energy and the eigenstates, we may go back and solve the nucleonic equation 
+	<br><br>
+	\begin{align}
+	\hat H_n = \left\langle\underbrace{-\sum_{i=1}^N \frac{\nabla^2_i}{2}- \sum_{i=1}^N\sum_{A=1}^M \frac{Z_A}{|{\bf r}_i-{\bf r}_A|} + \sum_{i=1}^N\sum_{j=i+1}^N \frac{1}{|{\bf r}_i-{\bf r}_j|}}_{E_e}\right\rangle -\sum_{A=1}^M \frac{\nabla^2_A}{2M_A}   + \sum_{A=1}^M\sum_{B=A+1}^M \frac{Z_ZA_B}{|{\bf r}_A-{\bf r}_B|},
+	\end{align}
+	<br>
+	where we average over the electronic Hamiltonian.
+</section>
+
+
+<!-- ------------------- SLIDE 9.9 ---------------------- -->
+<!-- ------------------- SLIDE 9.9 ---------------------- -->
+<!-- ------------------- SLIDE 9.9 ---------------------- -->
+<section>
+	We note that in
+	<br><br>
+	\begin{align}
+	\hat H_n =  -\sum_{A=1}^M \frac{\nabla^2_A}{2M_A} + E_e({\bf r}_A,{\bf r}_B,\dots,{\bf r}_C)
+	\end{align}
+	<br>
+	the electron energy $E({\bf r}_A,{\bf r}_b,\dots,{\bf r}_C)$ acts as a <b>potential</b> for the nuclear motion, meaning <i>the nuclei move on a potential energy surface determined by solving the electronic problem</i>.
+	<br>
+	<center>
+		<img src="lj.png" width=500  style="vertical-align:middle; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+	</center>
+</section>
+
+
+<!-- ------------------- SLIDE 10 ---------------------- -->
+<!-- ------------------- SLIDE 10 ---------------------- -->
+<!-- ------------------- SLIDE 10 ---------------------- -->
+<section>
+	<!-- Slater determinants and the Hartree-Fock approximation -->
+	<h2>Particle indistinguishability and Slater determinants</h2>
+	Fermionic quantum states must be anti-symmetric w.r.t. interchange of any two particles as per the Pauli principle. Because electrons are fundamentally indistinguishable, the wave function must be non-committal as to which particle is occupying which single-particle state $\phi_i({\bf x})$.
+	<br><br>
+	A convenient representation which achieves both counts is the <b>Slater determinant</b> 
+	<br><br>
+	\begin{align}
+	D = \Psi({\bf R}) =  
+	\left|
+	\begin{matrix}
+		\phi_1({\bf x}_1) & \phi_2({\bf x}_1) & \dots  & \phi_N({\bf x}_1)  \\
+		\phi_1({\bf x}_2) & \phi_2({\bf x}_2) & \dots  & \phi_N({\bf x}_2)  \\
+		\vdots 			  & \vdots 			  & \ddots & \vdots 			\\
+		\phi_1({\bf x}_N) & \phi_2({\bf x}_N) & \dots  & \phi_N({\bf x}_N) 
+	\end{matrix}
+	\right|
+	\end{align}
+</section>
+
+<!-- ------------------- SLIDE 10.5 ---------------------- -->
+<!-- ------------------- SLIDE 10.5 ---------------------- -->
+<!-- ------------------- SLIDE 10.5 ---------------------- -->
+<section>
+	<h2>Energy of the Slater determinant</h2>
+	The atomic Hamiltonian consists of a one-body and a two-body term, $\hat H=\hat H_0 + \hat W$, with 
+	<br><br>
+	\begin{align}
+	\hat H_0 = \sum_{i=1}^N \hat h_i = \sum_{i=1}^N\left[ -\frac{\nabla_i^2}{2} - \sum_{A=1}^M \frac{Z_A}{|{\bf r}_i-{\bf r}_A|} \right]
+	\end{align}
+	<br>
+	and
+	<br><br>
+	\begin{align}
+	\hat W = \sum_{i=1}^N\sum_{j=i+1}^N \hat w_{ij} = \sum_{i=1}^N\sum_{j=i+1}^N \frac{1}{|{\bf r}_i-{\bf r}_j|}.
+	\end{align}
+	<br>
+	The energy  is
+	<br><br>
+	\begin{align}
+	\langle \Psi({\bf R})|\hat H|\Psi({\bf R})\rangle \equiv E= \sum_{i=1}^N\langle \phi_i|\hat h|\phi_i\rangle + \sum_{i=1}^N\sum_{j=i+1}^N \Big[\langle \phi_i\phi_j|\hat w|\phi_i\phi_j\rangle - \langle \phi_i\phi_j|\hat w|\phi_j\phi_i\rangle  \Big]
+	\end{align}
+</section>
+
+
+<!-- ------------------- SLIDE 10.9 ---------------------- -->
+<!-- ------------------- SLIDE 10.9 ---------------------- -->
+<!-- ------------------- SLIDE 10.9 ---------------------- -->
+<section>
+	The energy of the single Slater determinant depends on the one-body and two-body integral,
+	<br><br>
+	\begin{align}
+	\langle \phi_i|\hat h|\phi_j\rangle \equiv \int\mathrm{d}{\bf x}\, \phi_i({\bf x})^* \left[-\frac{\nabla^2}{2}-\sum_{A=1}^M\frac{Z_A}{|{\bf r}-{\bf r}_A|} \right]\phi_j({\bf x})
+	\end{align}
+	<br>
+	and
+	<br><br>
+	\begin{align}
+	\langle \phi_i\phi_j|\hat w|\phi_k\phi_l\rangle	\equiv \int\mathrm{d}{\bf x}_1\int\mathrm{d}{\bf x}_2\, \phi_i({\bf x}_1)^* \phi_j({\bf x}_2)^* \left[\frac{1}{|{\bf r}_1-{\bf r}_2|}\right]\phi_k({\bf x}_1) \phi_l({\bf x}_2)
+	\end{align}
+</section>
+
+
+<!-- ------------------- SLIDE 11 ---------------------- -->
+<!-- ------------------- SLIDE 11 ---------------------- -->
+<!-- ------------------- SLIDE 11 ---------------------- -->
+<section>
+	<!-- Restricted/Unrestricted Hartree-Fock, Roothan-Hall and Pople-Nesbet equations -->
+	<h2>Minimizing the Slater determinantal energy and the Hatree-Fock equations</h2>
+	The single-particle orbitals $\phi_i({\bf x})$ are still unknown. We can find the basis set $\{\phi_i({\bf x})\}_{i=1}^N$ which minimizes the energy by considering the energy expectation value as a <i>functional</i> of the oribitals,
+	<br><br>
+	\begin{align}
+	\langle \Psi({\bf R})|\hat H|\Psi({\bf R})\rangle = E = E[\phi_1,\phi_2,\dots,\phi_N]. 
+	\end{align}
+	<br>
+	In order to minimize this functional we demand that the functional derivative of $E$ w.r.t. the orbital $\phi_i$ vanishes. The constraint that all the orbitals be <i>orthonormal</i> is enforced by use of Lagrangian multipliers. 
+	<br><br>
+	This leads to the <b>Hartree-Fock equations</b>
+	<br><br>
+	\begin{align}
+	\underbrace{\hat f}_{\text{Fock operator}}  \phi({\bf x}) = \hat h\phi({\bf x}) + \sum_{k=1}^N\Bigg[\underbrace{\int\mathrm{d}{\bf x}'\, \phi_k^*({\bf x}')\hat w \phi({\bf x})\phi_k({\bf x}')}_{\hat J_k} - \underbrace{\int\mathrm{d}{\bf x}'\, \phi_k({\bf x}')^* \hat w \phi({\bf x}')\phi_k({\bf x})}_{\hat K_k}\Bigg] = \varepsilon \phi({\bf x})
+	\end{align}
+
+	<aside class="notes">
+		<small>
+			funksjonal-minimum er løsning av SE, annen formulering av variasjonsprinsippet
+			<br>
+			sett av N kobla intergro-differensial ligninger
+			<br>
+
+		</small>
+	</aside>
+</section>
+
+<!-- ------------------- SLIDE 11.5 ---------------------- -->
+<!-- ------------------- SLIDE 11.5 ---------------------- -->
+<!-- ------------------- SLIDE 11.5 ---------------------- -->
+<section>
+	<h2>The Hatree-Fock equations expanded in a known basis</h2>
+	In order to make progress, we expand the unknown HF orbitals in a known basis $\{\varphi_k\}_{k=1}^L$,
+	<br><br>
+	\begin{align}
+	\phi_i({\bf x}) \approx \sum_{k=1}^LC_{ki}\varphi_k({\bf x}).
+	\end{align}
+	<br>
+	Employing the <i>Galerkin method</i>, we left-multiply the HF equations by $\varphi_q({\bf x})$ and integrate, giving the <i>weak form</i> of the HF equations 
+	<br><br>
+	\begin{align}
+	\sum_{k=1}^LC_{ki}\int\mathrm{d}{\bf x}\, \varphi_q({\bf x})\hat f \varphi_k({\bf x}) = \varepsilon_i \sum_{k=1}^LC_{ki} \int\mathrm{d}{\bf x}\varphi_q({\bf x})\varphi_k({\bf x}).
+	\end{align}
+	<br>
+	In matrix form:
+	<br><br>
+	\begin{align}
+	FC = \varepsilon SC.
+	\end{align}
+</section>
+
+
+
+<!-- ------------------- SLIDE 12 ---------------------- -->
+<!-- ------------------- SLIDE 12 ---------------------- -->
+<!-- ------------------- SLIDE 12 ---------------------- -->
+<section>	
+	<h2>Example Hartree-Fock calculations</h2>
+	<center>
+		<div style="display: inline-block;">
+			<img src="methaneDensity.png" width=550  style="vertical-align:middle; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+			<div class="under">Electron density <br> CH<sub>4</sub> </div>
+		</div>
+
+		<div style="display: inline-block;">
+			<img src="H2plus_dissociation1.png" width=550  style="vertical-align:middle; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+			<div class="under">Dissociation energy <br> H<sub>2</sub><sup>+</sup> </div>
+		</div>
+	</center>
+</section>
+
+<!-- ------------------- SLIDE 12.5 ---------------------- -->
+<!-- ------------------- SLIDE 12.5 ---------------------- -->
+<!-- ------------------- SLIDE 12.5 ---------------------- -->
+<section>	
+	<h2>Examples of HF benchmark tests</h2>
+	All energies calculated for these test molecules are within $0.02\%$ of the HF limit, except for the hydrogen molecule ($0.13\%$).
+	<center>
+		<div style="display: inline-block;">
+			<img src="hfbench.png" width=1000  style="vertical-align:middle; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+		</div>
+</section>
+
+<!-- ------------------- SLIDE 13 ---------------------- -->
+<!-- ------------------- SLIDE 13 ---------------------- -->
+<!-- ------------------- SLIDE 13 ---------------------- -->
+<section>
+	<!-- HF as a mean-field theory and electron correlations -->
+	<h2>Hartree-Fock as a <i>mean-field theory</i> and electron correlations</h2>
+	Under the <i>single Slater determinant</i> wave function ansatz, same-spin correlation is included (exchange correlation) making sure that the electron density $\rho({\bf r}_1,{\bf r}_2)\rightarrow 0$ as ${\bf r}_1\rightarrow {\bf r}_2$ for electrons with the same spin projection $\sigma$. 
+	<br><br>
+	However, each electron interacts only with the average charge density of the rest of the electrons combined meaning HF is in a sense a mean-field theory. We are missing dynamic (instantenous) correlations. 
+	<br><br>
+	We cannot achieve dynamic correlations between electrons with only a single Slater determinant. We must either use a linear combination of (nearly degenerate) Slater determinants, or include other correlation terms in the wave function. 
+</section>
+
+
+<!-- ------------------- SLIDE 14 ---------------------- -->
+<!-- ------------------- SLIDE 14 ---------------------- -->
+<!-- ------------------- SLIDE 14 ---------------------- -->
+<section>
+	<h2>The Jastrow factor</h2>
+	The Jastrow factor is an explicit parametrization of the instantaneous repulsion felt by electrons moving in a field of other electrons. We use a simple form, but it can in general be (much) more complicated
+	<br><br>
+	\begin{align}
+	J({\bf R}) = \exp\left[\sum_{i=1}^N\sum_{j=i+1}^N \frac{a_{ij}r_{ij}}{1+\beta r_{ij}}\right], \ \ \ \text{ with } \ r_{ij}\equiv |{\bf r}_i-{\bf r}_j|.
+	\end{align}
+	<br>
+	The $a_{ij}$ is a spin-dependent constant, while $\beta>0$ is a tuneable parameter. 
+	<br><br>
+	The <b>Slater-Jastrow</b> ansatz, 
+	<br><br>
+	\begin{align}
+	\Phi({\bf R})=D({\bf R})J({\bf R}) = \left|
+	\begin{matrix}
+		\phi_1({\bf x}_1) & \phi_2({\bf x}_1) & \dots  & \phi_N({\bf x}_1)  \\
+		\phi_1({\bf x}_2) & \phi_2({\bf x}_2) & \dots  & \phi_N({\bf x}_2)  \\
+		\vdots 			  & \vdots 			  & \ddots & \vdots 			\\
+		\phi_1({\bf x}_N) & \phi_2({\bf x}_N) & \dots  & \phi_N({\bf x}_N) 
+	\end{matrix}
+	\right| \exp\left[\sum_{i=1}^N\sum_{j=i+1}^N \frac{a_{ij}r_{ij}}{1+\beta r_{ij}}\right]
+	\end{align}
+	<br>
+	taking correlation effects explicitly into account is (hopefully) a more accurate representation of the <i>true</i> ground state wave function.
+</section>
+
+
+<!-- ------------------- SLIDE 15 ---------------------- -->
+<!-- ------------------- SLIDE 15 ---------------------- -->
+<!-- ------------------- SLIDE 15 ---------------------- -->
+<section>
+	<center>
+		<div style="display: inline-block;">
+			<img src="jastrowhole2.png" width=1000  style="vertical-align:middle; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+			<div class="under"> Effect of the Jastrow factor on the wave function<br> as ${\bf r}_1$ approaces ${\bf r}_2$ held in place at ${\bf r}_2=(1,1,0)$ </div>
+		</div>
+	</center>
+</section>
+
+
+<!-- ------------------- SLIDE 16 ---------------------- -->
+<!-- ------------------- SLIDE 16 ---------------------- -->
+<!-- ------------------- SLIDE 16 ---------------------- 
+<section>
+	Two-electron integrals and why we are forced to use Gaussian Slater-only wave function for HF
+</section>
+-->
+
+
+<!-- ------------------- SLIDE 17 ---------------------- -->
+<!-- ------------------- SLIDE 17 ---------------------- -->
+<!-- ------------------- SLIDE 17 ---------------------- -->
+<section>
+	<!-- Explicit dynamic correlations and VMC -->
+	<h2>Post Hartree-Fock methods: Quantum monte carlo</h2>
+	While Hartree-Fock has traditionally been the starting point (and sometimes also the end point) for electronic structure calculations, more accurate <i>post Hartree-Fock</i> methods are often needed in order to achieve the desired accuracy. 
+	<br><br>
+	An example of a <i>conceptually</i> simple method is the <b>Variational Monte Carlo</b> (VMC) scheme. Under VMC, we formulate any quantity we are interested in (usually the ground state energy) in terms of an integral which we directly solve by Monte Carlo methods.
+	<br><br>
+	\begin{align}
+	E_0=\langle \Psi|\hat H|\Psi\rangle = \frac{\int\mathrm{d}^{3N}{\bf R}\, \Psi^*({\bf R})\hat H({\bf R}) \Psi({\bf R})}{\int\mathrm{d}^{3N}{\bf R}\, \Psi^*({\bf R})\Psi({\bf R})}
+	\end{align}
+</section>
+
+
+<!-- ------------------- SLIDE 19 ---------------------- -->
+<!-- ------------------- SLIDE 19 ---------------------- -->
+<!-- ------------------- SLIDE 19 ---------------------- -->
+<section>
+	<!-- Monte Carlo integration and Metropolis -->
+	<h2>Monte Carlo integration</h2>
+	Monte Carlo integration essentially evaluates approximations to an integral by picking function arguments at random and summing the resulting function values,
+	<br><br>
+	\begin{align}
+	I\equiv \int_a^b \mathrm{d}x\, f(x) \approx \frac{b-a}{N}\sum_{i=1}^Nf(X_i) \ \ \ (\{X_i\}_{i=1}^N \text{ independent, uniform random samples on } [a,b]).
+	\end{align}
+	<br>
+	The distribution need not in general be uniform,
+	<br><br>
+	\begin{align}
+	I=\int_a^b\mathrm{d}x\, f(x) \approx \frac{1}{N}\sum_{i=1}^N \frac{f(X_i)}{P(X_i)}  \ \ \ (\{X_i\}_{i=1}^N \text{ independent samples distributed according to }P(x)\text{ on } [a,b]).
+	\end{align}
+	<br>
+	Using a distribution "close" to (parts of) the integrand is desirable. 
+</section>
+
+
+<!-- ------------------- SLIDE 20 ---------------------- -->
+<!-- ------------------- SLIDE 20 ---------------------- -->
+<!-- ------------------- SLIDE 20 ---------------------- -->
+<section>
+	<!-- VMC stuff -->
+	<h2>The <i>local</i> energy</h2>
+	The ground state energy is an integral over all electronic coordinates, and as such cannot depend on the positions of the electrons. However, it is useful to introduce a measure of the energy which has such spatial dependence. 
+	<br><br>
+	The <i>local</i> energy $E_\text{L}$ is defined as
+	<br><br>
+	\begin{align}
+	E_\text{L}({\bf R}) = \frac{\hat H \Psi({\bf R})}{\Psi({\bf R})}=\frac{1}{\Psi({\bf R})}\sum_{i=1}^N\left[ -\frac{\nabla_i^2}{2}-\sum_{A=1}^M \frac{Z_A}{|{\bf r}_i-{\bf r}_A|} + \sum_{j=i+1}^N \frac{1}{|{\bf r}_i-{\bf r}_j|}\right]\Psi({\bf R})
+	\end{align}
+	<br>
+	For the true wave function, $\hat H \Psi({\bf R}) = E\Psi({\bf R})$ meaning the local energy becomes a constant. 
+	<br><br>
+	The Variational Monte Carlo integral can be written in terms of the local energy as 
+	<br><br>
+	\begin{align}
+	E_\text{VMC} = \frac{\displaystyle \int\mathrm{d}{\bf R}\,\Psi^*({\bf R})\Psi({\bf R})\frac{\hat H\Psi({\bf R})}{\Psi({\bf R})}}{\displaystyle \int\mathrm{d}{\bf R}\, |\Psi({\bf R})|^2} = \int\mathrm{d}{\bf R}\, \rho({\bf R})E_\text{L}({\bf R}).
+	\end{align}
+</section>
+
+
+<!-- ------------------- SLIDE 20.5 ---------------------- -->
+<!-- ------------------- SLIDE 20.5 ---------------------- -->
+<!-- ------------------- SLIDE 20.5 ---------------------- -->
+<section>
+	<h2>Sampling the electron density: The Metropolis algorithm</h2>
+	When performing the Monte Carlo integration, we may use the electron density $\rho({\bf R}) = |\Psi({\bf R})|^2\Big/\int\mathrm{d}{\bf R}\, |\Psi({\bf R})|^2$ as the random sample distribution $P$, giving 
+	<br><br>
+	\begin{align}
+	E_\text{VMC} = \int\mathrm{d}{\bf R}\, \rho({\bf R})E_\text{L}({\bf R}) \approx \frac{1}{N_\text{MC}}\sum_{i=1}^{N_\text{MC}}E_\text{L}({\bf R}_i),
+	\end{align}
+	<br>
+	with ${\bf R}_i$ coordinate sets distributed according to $\rho({\bf R})$. 
+	<br><br>
+	The $\rho({\bf R})$ distribution is complicated and it is (most likely) impossible to draw samples directly by e.g. inversion sampling. We use instead the <b>Metropolis algorithm</b>, which only requires us to be able to compute efficiently a quantity proportional to the distribution $\rho$. Since we can easily evaluate $|\Psi({\bf R})|^2$ given coordinates ${\bf R}$, this is no problem.
+	<br><br>
+	The Metropolis algorithm generates a Markov Chain of samples asymptotically distributed according to $P$. 
+</section>
+
+
+<!-- ------------------- SLIDE 21 ---------------------- -->
+<!-- ------------------- SLIDE 21 ---------------------- -->
+<!-- ------------------- SLIDE 21 ---------------------- -->
+<section>
+	<!-- Parameter optimization, example beta plot -->
+	<h2>Wave function ansatz and parameter optimization</h2>
+	In order to employ the VMC machinery, we need to choose a form of the wave function <i>guess</i>. We use the aforementioned Slater-Jastrow form, $\Psi_\text{Trial}=\Psi_\text{T}=D({\bf R})J({\bf R})$. 
+	<br><br>
+	VMC is a variational method so the answer we get is an <i>upper bound</i> to the true ground state energy. We do not&mdash;a priori&mdash;know the optimal value of the paramters $\beta$ (and possibly other parameters) which minimize the $E_\text{VMC}$. 
+	<br>
+	<center>
+		<div style="display: inline-block;">
+			<img src="hebeta2.png" width=500  style="align:right; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+		</div>
+	</center>		
+	<br>
+	We can optimize the $\beta$ parameter by computing $\frac{\partial \langle E_\text{VMC}(\beta)\rangle}{\partial \beta}$ and updating $\beta$ after each iteration according to a steepest descent algorithm.
+</section>
+
+<!-- ------------------- SLIDE 24.5 ---------------------- -->
+<!-- ------------------- SLIDE 24.5 ---------------------- -->
+<!-- ------------------- SLIDE 24.5 ---------------------- -->
+<section>
+	<!-- Benchmarks HF+VMC -->
+	<h2>Examples of VMC benchmark tests</h2>
+	The $\alpha$ parameter is a parameter inserted in the single particle orbitals in the Slater determinant (effective, shielded nucleus charge), while $\beta$ determines the strenght of the dynamic correlation effects.
+	<center>
+		<img src="vmcbench.png" width=1000  style="align:right; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+	</center>
+</section>
+
+<!-- ------------------- SLIDE 25 ---------------------- -->
+<!-- ------------------- SLIDE 25 ---------------------- -->
+<!-- ------------------- SLIDE 25 ---------------------- -->
+<section>
+	<!-- Machine learning and neural networks -->
+	<h2>Machine learning and artificial neural networks</h2>
+	Now that we have a way of generating <i>ab initio</i> quantum mechanical energy data we return to the true subject of the thesis: using machine learning algorithms to parameterize general effective potentials for use in molecular dyanmics simulations. 
+	<br><br>
+	Essentially, I want to teach my laptop how to do quantum mechanics.
+	<br><br>
+	The training strategy is that of <i>supervised learning</i>, where the algorithm is presented with (preferably many) examples of input/output $x/y$ pairs, which it attempts to match. 
+</section>
+
+
+<!-- ------------------- SLIDE 26 ---------------------- -->
+<!-- ------------------- SLIDE 26 ---------------------- -->
+<!-- ------------------- SLIDE 26 ---------------------- -->
+<section>
+	<!-- Feed forward ANN diagram -->
+	<H2>Feed forward artificial neural networks</H2>
+	The scheme we use is that of the feed forward ANN. The network is simply a complicated functional form, $\text{ANN}:\mathbb{R}^p\rightarrow \mathbb{R}^q$. We can visualize it as a series of layers of <i>artificial neurons</i>, which the initial signal is propagated through. We denote the output of the network by $y'$ (in general a vector). 
+	<br>
+	<center>
+		<img src="layers.png" width=500  style="align:right; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+	</center>
+</section>
+
+
+<!-- ------------------- SLIDE 26.5 ---------------------- -->
+<!-- ------------------- SLIDE 26.5 ---------------------- -->
+<!-- ------------------- SLIDE 26.5 ---------------------- -->
+<section>
+	<H2>Artificial neurons</H2>
+	Artificial neurons&mdash;the constituent parts of the ANN&mdash;are inspired by biological neurons. Each neuron recieves input from the neurons in the previous layers, to which it may be strongly or weakly connected. The input is multiplied by a <i>weight</i>, meaning strong connections between subsequent neurons are represented by large values of $w_{i}$. 
+	<br><br>
+	Each neuron has an associated <i>bias</i> $b$, which serves to adjust the saturation of the output regardless of the input. 
+	<br>
+	<center>
+		<img src="neuron.png" width=800  style="align:right; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+	</center>
+</section>
+
+
+<!-- ------------------- SLIDE 26.9 ---------------------- -->
+<!-- ------------------- SLIDE 26.9 ---------------------- -->
+<!-- ------------------- SLIDE 26.9 ---------------------- -->
+<section>
+	<H2>Activation functions</H2>
+	All the neuron inputs are multiplied by the weighs and summed, and the bias is added. Subsequently, an <i>activation function</i> is applied. Many different functional forms are used by different researchers for different purposes. The example shown here is a sigmoid function 
+	<br><br>
+	\begin{align}
+	f(x) = \frac{1}{1+\mathrm{e}^{-x}}.
+	\end{align}
+	<br>
+	<center>
+		<img src="sigmoid.png" width=500  style="align:right; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+	</center>
+</section>
+
+
+
+<!-- ------------------- SLIDE 27 ---------------------- -->
+<!-- ------------------- SLIDE 27 ---------------------- -->
+<!-- ------------------- SLIDE 27 ---------------------- -->
+<section>
+	<!-- ANN are universal approximators and LJ example -->
+	<h2>Artificial neural networks are <b>universal approximators</b></h2>
+	Given any continous function $g(x)$ defined on a closed interval of $\mathbb{R}$ and any $\varepsilon>0$, there exists a finite $N$ and vectors ${\bf v}, {\bf b}, {\bf w}\in \mathbb{R}^N$ such that 
+	<br><br>
+	\begin{align}
+	|F(x)-f(x)|<\varepsilon,
+	\end{align}
+	<br>
+	with 
+	<br><br>
+	\begin{align}
+	G(x)=\sum_{i=1}^N v_i \xi(w_i x + b_i), \ \ \ \text{ where }\xi \text{ is the activation function.}
+	\end{align}
+	<br>
+	This is known as the <b>universal approximation theorem</b>, and it says that a single hidden layer is enough to make an ANN capable of approximating any continous real-valued function to arbitrary precision.
+</section>
+
+
+<!-- ------------------- SLIDE 28 ---------------------- -->
+<!-- ------------------- SLIDE 28 ---------------------- -->
+<!-- ------------------- SLIDE 28 ---------------------- -->
+<section>
+	<!-- Backpropagation -->
+	<h2>The cost function and backpropagation</h2>
+	The <i>universal approximation theorem</i> says nothing&mdash;however&mdash;about how to construct the network in question. 
+	<br><br>
+	In order to make progress, we define a measure of how successful the ANN currently is at replicating the $x/y$ training data points. For each input/output pair, we take the squared difference between the desired output $y$ and the actual network output $y'$. Summing over all the training inputs, and taking the square root yields the <b>cost function</b> $C(y')$,
+	<br><br>
+	\begin{align}
+	C(y') = \Vert {\bf y}-{\bf y}'\Vert_2 = \sqrt{\sum_{i=1}^N (y_i-y_i')^2}.
+	\end{align}
+	<br>
+	Taking the derivative of the cost function w.r.t. all the weights and biases gives us a way to update the parameters of the ANN in order to improve it's performance. The procedure normally used to perform this differentiation is called <b>backpropagation</b>.
+</section>
+
+
+<!-- ------------------- SLIDE 27.5 ---------------------- -->
+<!-- ------------------- SLIDE 27.5 ---------------------- -->
+<!-- ------------------- SLIDE 27.5 ---------------------- -->
+<section>
+	<h2>ANN training sequence example</h2>
+	<center>
+		<img src="ljtrain.png" width=1000  style="align:right; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+	</center>
+</section>
+
+<!-- ------------------- SLIDE 28.5 ---------------------- -->
+<!-- ------------------- SLIDE 28.5 ---------------------- -->
+<!-- ------------------- SLIDE 28.5 ---------------------- -->
+<section>
+	<!-- ANN 2D example plot -->
+	<h2>Multivariable ANN training example</h2>
+	Training an ANN to approximate a part of the three-body potential of the Stillinger-Weber potential for Si. 
+	<center>
+		<img src="swneterror.png" width=550  style="align:left; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+		<img src="swtrain2.png"   width=550  style="align:right; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+	</center>
+</section>
+
+
+<!-- ------------------- SLIDE 29 ---------------------- -->
+<!-- ------------------- SLIDE 29 ---------------------- -->
+<!-- ------------------- SLIDE 29 ---------------------- -->
+<section>
+	<!-- Noisy data and VMC parametrization -->
+	<h2>Training on noisy data and <i>overfitting</i></h2>
+	<center>
+		<img src="noisetraining1.png" width=1000  style="align:left; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+	</center>
+</section>
+
+
+<!-- ------------------- SLIDE 29.5 ---------------------- -->
+<!-- ------------------- SLIDE 29.5 ---------------------- -->
+<!-- ------------------- SLIDE 29.5 ---------------------- -->
+<section>
+	The cost function evaluated for the training data set and the validation (testing) data set (with different noise).
+	<center>
+		<img src="noisetraining2.png" width=1000  style="align:left; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+	</center>
+</section>
+
+<!-- ------------------- SLIDE 30 ---------------------- -->
+<!-- ------------------- SLIDE 30 ---------------------- -->
+<!-- ------------------- SLIDE 30 ---------------------- -->
+<section data-background-transition="slide" data-background="mdexample.png" style="background: rgba(247, 242, 211, 0.8)">
+	<!-- Molecular dynamics, ingenious partitional schemes -->
+	<h2>Molecular dynamics</h2>
+	Classical dynamics by Newton's laws for atoms and molecules, using a given force field (FF) derived from some potential $V({\bf R})$.
+	<br><br>
+	We use the ANN as a potential, using <i>backpropagation</i> to differentiate $V({\bf R})$ in order to obtain ${\bf F}=-\nabla V({\bf R})$. 
+	<br><br>
+	Naively scales as $\mathcal{O}(N^2)$ with system size $N$, but can be made linear with ingenious partitioning schemes.
+</section>
+
+
+<!-- ------------------- SLIDE 31 ---------------------- -->
+<!-- ------------------- SLIDE 31 ---------------------- -->
+<!-- ------------------- SLIDE 31 ---------------------- -->
+<section>
+	<!-- Benchmarks for ANN in MD -->
+	<h2>Testing the ANN potentials in MD</h2>
+	We train an ANN to approximate the simple Lennard-Jones (LJ) potential, and verify that subsequent MD simulations recover the dynamics of MD runs using LJ directly.
+	<br>
+	<center>
+		<div style="display: inline-block;">
+			<img src="singleovito.png" width=550  style="align:left; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+			<div class="under"> Snapshot from the MD simulation of the <br> LJ liquid using the ANN potential </div>
+		</div>
+
+		<div style="display: inline-block;">
+			<img src="longtrainpair.png" width=550  style="align:right; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+			<div class="under"> Computed pair correlation function $g(r)$ <br> for the original LJ potential and the <br> approximating ANN </div>
+		</div>
+	</center>
+</section>
+
+
+<!-- ------------------- SLIDE 31.5 ---------------------- -->
+<!-- ------------------- SLIDE 31.5 ---------------------- -->
+<!-- ------------------- SLIDE 31.5 ---------------------- -->
+<section>
+	<!-- Benchmarks for ANN in MD -->
+	<h2>One particle energy</h2>
+	Following the "one particle energy" of some specific particle for the ANN and LJ potentials.
+	<br>
+	<center>
+		<img src="singlepart.png" width=800  style="align:left; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+	</center>
+</section>
+
+
+<!-- ------------------- SLIDE 32 ---------------------- -->
+<!-- ------------------- SLIDE 32 ---------------------- -->
+<!-- ------------------- SLIDE 32 ---------------------- -->
+<section>
+	<!-- Closing remarks -->
+	<h2>Closing remarks</h2>
+	<center>
+		<img src="thesisdefence.png" width=700  style="align:right; display:inline; border: 0; box-shadow: 0 0 1px 0px white inset, 0 0 1px 0px white; background:transparent;"> 
+	</center>
+</section>
+
+<!-- ------------------- end of main content ---------------------- -->
+</div> <!-- class="slides" -->
+</div> <!-- class="reveal" -->
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+    // Display navigation controls in the bottom right corner
+    controls: true,
+
+    // Display progress bar (below the horiz. slider)
+    progress: true,
+
+    // Display the page number of the current slide
+    slideNumber: true,
+
+    // Push each slide change to the browser history
+    history: true,
+
+    // Enable keyboard shortcuts for navigation
+    keyboard: true,
+
+    // Enable the slide overview mode
+    overview: true,
+
+    // Vertical centering of slides
+    //center: true,
+    center: false,
+
+    // Enables touch navigation on devices with touch input
+    touch: true,
+
+    // Loop the presentation
+    loop: false,
+
+    // Change the presentation direction to be RTL
+    rtl: false,
+
+    // Turns fragments on and off globally
+    fragments: true,
+
+    // Flags if the presentation is running in an embedded mode,
+    // i.e. contained within a limited portion of the screen
+    embedded: false,
+
+    // Number of milliseconds between automatically proceeding to the
+    // next slide, disabled when set to 0, this value can be overwritten
+    // by using a data-autoslide attribute on your slides
+    autoSlide: 0,
+
+    // Stop auto-sliding after user input
+    autoSlideStoppable: true,
+
+    // Enable slide navigation via mouse wheel
+    mouseWheel: false,
+
+    // Hides the address bar on mobile devices
+    hideAddressBar: true,
+
+    // Opens links in an iframe preview overlay
+    previewLinks: false,
+
+    // Transition style
+    transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+    // Transition speed
+    transitionSpeed: 'slow', // default/fast/slow
+
+    // Transition style for full page slide backgrounds
+    backgroundTransition: 'default', // default/none/slide/concave/convex/zoom
+
+    // Number of slides away from the current that are visible
+    viewDistance: 3,
+
+    // Parallax background image
+    //parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+
+    // Parallax background size
+    //parallaxBackgroundSize: '' // CSS syntax, e.g. "2100px 900px"
+
+    theme: Reveal.getQueryHash().theme, // available themes are in reveal.js/css/theme
+    transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+});
+
+Reveal.initialize({
+    dependencies: [
+        // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+        { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+
+        // Interpret Markdown in <section> elements
+        { src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        { src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+
+        // Syntax highlight for <code> elements
+        { src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+
+        // Zoom in and out with Alt+click
+        { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // Speaker notes
+        { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // Remote control your reveal.js presentation using a touch device
+        //{ src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // MathJax
+        { src: 'reveal.js/plugin/math/math.js', async: true }
+    ]
+});
+
+Reveal.initialize({
+
+    // The "normal" size of the presentation, aspect ratio will be preserved
+    // when the presentation is scaled to fit different resolutions. Can be
+    // specified using percentage units.
+    width: 1170,  // original: 960,
+    height: 700,
+
+    // Factor of the display size that should remain empty around the content
+    margin: 0.1,
+
+    // Bounds for smallest/largest possible scale to apply to content
+    minScale: 0.2,
+    maxScale: 1.0
+
+});
+</script>
+
+
+<div style="position: absolute; bottom: 0px; left: 0; margin-left: 20px; margin-bottom: 0px;">
+<img src="uio_footer.png" width=300></div>
+
+
+
+
+</body>
+</html>
