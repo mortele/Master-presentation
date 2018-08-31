@@ -4,12 +4,6 @@ This is the presentation I gave during the defence of my [thesis](https://www.du
 #### How to download and run
 Download by 
 ```
-> git clone --recurse-submodules git@github.com:mortele/Master-presentation.git
+> git clone git@github.com:mortele/Master-presentation.git
 ```
 The file `master-final.html` can now simply be opened in any browser to show the presentation. Pressing `S` will enter presenter mode, showing any notes defined in `<aside> </aside>` blocks for each slide.
-
-------
-If you are using an old `git` version, you might have to instead use the `--recursive` command instead of `--recurse-submodules`, i.e.
-```
-> git clone -- git@github.com:mortele/Master-presentation.git
-```
